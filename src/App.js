@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import React, {Component} from 'react';
 import './App.css';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Status from './components/Status'
+import { Account } from './components/Accounts';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ListController from './components/LightsController';
 
-function App() {
+function Auth() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Account>
+      <Status />
+      <Signup />
+      <Login />
+    </Account>
   );
-}
+};
 
+ 
+class App extends Component {
+  render() {
+    return (      
+       <BrowserRouter>
+        <div>
+            <Switch>
+              <Route path="/" exact component={Auth} />
+              <Route path="/devicecontroller/:username" component={ListController}/>
+           </Switch>
+        </div> 
+      </BrowserRouter>
+    );
+  }
+}
+ 
 export default App;
+//export default Auth;
